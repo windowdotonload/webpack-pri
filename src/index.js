@@ -3,4 +3,4 @@
  * @version:
  * @Author: windowdotonload
  */
-console.log('123123')
+import './index.css'
