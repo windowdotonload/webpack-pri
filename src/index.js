@@ -16,3 +16,5 @@ import './index.css';
 const fun_qweqwe_A = () => {
     console.log('123');
 };
+
+console.log(module.hot)
