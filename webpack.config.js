@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { Hash } = require('crypto');
 
 module.exports = {
   mode: 'development',
@@ -24,17 +23,16 @@ module.exports = {
       },
       {
         test: /\.(jpeg|png|jpg)$/,
-
         loader: 'url-loader',
         options: {
           // 图片小于8kb，转化为base64处理
           // 下载url-loader,file-loader
           // url-loader依赖于file-loader
           limit: 8 * 1024,
+          name: '[hash:10].[ext]',
           // 给图片重命名
           // 取hash值前十位，[ext]文件原扩展名
           esModule: false,
-          name: '[hash:10].[ext]',
           outputPath: 'assets'
         },
       },
@@ -43,13 +41,17 @@ module.exports = {
         test: /\.html$/,
         loader: 'html-loader',
         options: {
-          esModule: false
+          esModule: false,
         }
       },
       // 打包其他资源
       {
-        exclude: /\.(css|js|html)$/,
-        loader: 'file-loader'
+        // exclude:除这些文件之外的文件打包
+        exclude: /\.(css|js|html|jpeg|png|jpg)$/,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'assets'
+        }
       }
     ]
   },
