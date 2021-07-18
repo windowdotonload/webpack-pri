@@ -3,4 +3,16 @@
  * @version:
  * @Author: windowdotonload
  */
-import './index.css'
+
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: windowdotonload
+ */
+import './index.css';
+// import '@babel/polyfill'
+// import 'core-js'
+
+const fun_qweqwe_A = () => {
+    console.log('123');
+};
