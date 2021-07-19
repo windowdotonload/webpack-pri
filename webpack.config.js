@@ -11,7 +11,7 @@ module.exports = {
   entry: path.join(__dirname, 'src', 'index'),
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: "js/bundle.js",
+    filename: "js/[name].bundle.[contenthash:10].js",
     chunkFilename: '[name].js'
   },
   module: {
@@ -114,7 +114,9 @@ module.exports = {
                   }
                 },
               ]
-            ]
+            ],
+            // 开启babel缓存
+            cacheDirectory: true
           }
         }
       }
@@ -142,6 +144,7 @@ module.exports = {
   resolve: {
     extensions: ['.json', '.js', '.jsx'],
   },
+  // sourcemap
   devtool: 'source-map',
   // 开发服务器
   // 只会在内存中编译打包，不会有任何实际物理上的输出
