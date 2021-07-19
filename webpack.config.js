@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+const workboxWebpackPlugin = require("workbox-webpack-plugin")
 
 process.env.NODE_ENV = 'development'
 module.exports = {
@@ -11,7 +12,7 @@ module.exports = {
   entry: path.join(__dirname, 'src', 'index'),
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: "js/[name].bundle.[contenthash:10].js",
+    filename: "js/[name].bundle.[hash:10].js",
     chunkFilename: '[name].js'
   },
   module: {
@@ -140,6 +141,13 @@ module.exports = {
     // 压缩css文件
     new optimizeCssAssetsWebpackPlugin(),
     new CleanWebpackPlugin(),
+    new workboxWebpackPlugin.GenerateSW({
+      // 帮助serviceworker快速启动
+      // 删除旧的serviceworker
+      // 生成一个serviceworker配置文件
+      clientsClaim: true,
+      skipWaiting: true
+    })
   ],
   resolve: {
     extensions: ['.json', '.js', '.jsx'],

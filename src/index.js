@@ -18,3 +18,14 @@ const fun_qweqwe_A = () => {
 };
 
 console.log(module.hot)
+
+// 注册serviceworker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(() => {
+            console.log('注册成功了')
+        }).then(() => {
+            console.log('注册失败了')
+        })
+    })
+}
